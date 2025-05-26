@@ -27,16 +27,12 @@ This Terraform module sets up a static website hosted on AWS S3 and served throu
 Ensure your `index.html` file is placed inside the S3 bucket after deployment to enable the website to load correctly.
 
 ```hcl
-module "static_website" {
-  source = "./path-to-this-module"
-
-  domain_name        = "yourdomain.com"
-  tags               = {
-    Environment = "production"
-    Project     = "static-site"
-  }
-  cloudfront_zone_id = "your-cloudfront-zone-id"
-  logging_bucket      = "your-logging-bucket-name" // optional, set empty string to disable
+module "cloudfront" {
+  source           = "delivops/static-websites/cloudfront"
+  domain_name      = "cloudfront.internal.delivops.com"
+  aws_region       = var.aws_region
+  route_53_zone_id = var.route_53_zone_id
+  certificate_arn  = var.certificate_arn
 }
 ```
 
