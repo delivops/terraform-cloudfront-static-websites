@@ -53,21 +53,17 @@ module "static_website" {
 This module is released under the MIT License.
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
-| Name                                                                        | Version   |
-| --------------------------------------------------------------------------- | --------- |
-| <a name="requirement_aws"></a> [aws](#requirement_aws)                      | >= 4.67.0 |
-| <a name="requirement_cloudfront"></a> [cloudfront](#requirement_cloudfront) | ~> 3.0    |
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67.0 |
 
 ## Providers
 
-| Name                                                                        | Version   |
-| --------------------------------------------------------------------------- | --------- |
-| <a name="provider_aws"></a> [aws](#provider_aws)                            | >= 4.67.0 |
-| <a name="provider_aws.virginia"></a> [aws.virginia](#provider_aws.virginia) | >= 4.67.0 |
-| <a name="provider_cloudfront"></a> [cloudfront](#provider_cloudfront)       | ~> 3.0    |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.67.0 |
 
 ## Modules
 
@@ -75,39 +71,34 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                                                            | Type        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [aws_acm_certificate.cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate)                                                         | resource    |
-| [aws_acm_certificate_validation.cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation)                                   | resource    |
-| [aws_cloudfront_distribution.dist](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution)                                         | resource    |
-| [aws_cloudfront_origin_access_identity.origin_access_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_identity)   | resource    |
-| [aws_s3_bucket.bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)                                                                   | resource    |
-| [aws_s3_bucket_acl.bucket_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl)                                                       | resource    |
-| [aws_s3_bucket_ownership_controls.bucket_ownership_controls](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls)          | resource    |
-| [aws_s3_bucket_policy.bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy)                                              | resource    |
-| [aws_s3_bucket_versioning.bucket_versioning](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning)                                  | resource    |
-| [aws_s3_bucket_website_configuration.bucket_website_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) | resource    |
-| [cloudfront_record.acm](https://registry.terraform.io/providers/cloudfront/cloudfront/latest/docs/resources/record)                                                             | resource    |
-| [cloudfront_record.cname](https://registry.terraform.io/providers/cloudfront/cloudfront/latest/docs/resources/record)                                                           | resource    |
-| [aws_iam_policy_document.bucket_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)                            | data source |
+| Name | Type |
+|------|------|
+| [aws_cloudfront_distribution.dist](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
+| [aws_cloudfront_origin_access_identity.origin_access_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_identity) | resource |
+| [aws_route53_record.route53_record](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_s3_bucket.bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.bucket_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_ownership_controls.bucket_ownership_controls](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
+| [aws_s3_bucket_policy.bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_versioning.bucket_versioning](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
+| [aws_s3_bucket_website_configuration.bucket_website_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) | resource |
+| [aws_iam_policy_document.bucket_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
-| Name                                                                                          | Description                                                                                                 | Type          | Default | Required |
-| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------- | ------- | :------: |
-| <a name="input_aws_region"></a> [aws_region](#input_aws_region)                               | The AWS region to put the bucket into                                                                       | `string`      | n/a     |   yes    |
-| <a name="input_cloudfront_api_token"></a> [cloudfront_api_token](#input_cloudfront_api_token) | The cloudfront API token for accessing Cloudfare                                                            | `string`      | n/a     |   yes    |
-| <a name="input_cloudfront_zone_id"></a> [cloudfront_zone_id](#input_cloudfront_zone_id)       | The DNS zone ID in which add the record. You can get this from the domain view in the cloudfront dashboard. | `string`      | n/a     |   yes    |
-| <a name="input_domain_name"></a> [domain_name](#input_domain_name)                            | This is the domain name you want to use to point your website. (eg. example.com, www.example.com etc)       | `string`      | n/a     |   yes    |
-| <a name="input_logging_bucket"></a> [logging_bucket](#input_logging_bucket)                   | Logging Bucket                                                                                              | `string`      | `""`    |    no    |
-| <a name="input_tags"></a> [tags](#input_tags)                                                 | Tags you would like to apply across AWS resources.                                                          | `map(string)` | `{}`    |    no    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to put the bucket into | `string` | n/a | yes |
+| <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | Certificate ARN for the domain name | `string` | `""` | no |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | This is the domain name you want to use to point your website. (eg. example.com, www.example.com etc) | `string` | n/a | yes |
+| <a name="input_logging_bucket"></a> [logging\_bucket](#input\_logging\_bucket) | Logging Bucket | `string` | `""` | no |
+| <a name="input_route_53_zone_id"></a> [route\_53\_zone\_id](#input\_route\_53\_zone\_id) | Zone ID where the domain name will be stored | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags you would like to apply across AWS resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 
-| Name                                                                          | Description                                                                                                              |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| <a name="output_aws_acm"></a> [aws_acm](#output_aws_acm)                      | Attributes from aws_acm_certificate (https://www.terraform.io/docs/providers/aws/r/acm_certificate.html)                 |
-| <a name="output_aws_cloudfront"></a> [aws_cloudfront](#output_aws_cloudfront) | Attributes from aws_cloudfront_distribution (https://www.terraform.io/docs/providers/aws/r/cloudfront_distribution.html) |
-| <a name="output_aws_s3"></a> [aws_s3](#output_aws_s3)                         | Attributes from aws_s3_bucket (https://www.terraform.io/docs/providers/aws/r/s3_bucket.html)                             |
-
+| Name | Description |
+|------|-------------|
+| <a name="output_aws_cloudfront"></a> [aws\_cloudfront](#output\_aws\_cloudfront) | Attributes from aws\_cloudfront\_distribution (https://www.terraform.io/docs/providers/aws/r/cloudfront_distribution.html) |
+| <a name="output_aws_s3"></a> [aws\_s3](#output\_aws\_s3) | Attributes from aws\_s3\_bucket (https://www.terraform.io/docs/providers/aws/r/s3_bucket.html) |
 <!-- END_TF_DOCS -->
